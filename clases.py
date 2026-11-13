@@ -20,6 +20,6 @@ class Mascota:
         self.years = years
         self.special_care = []
     
-
+print("hola")
         
         
