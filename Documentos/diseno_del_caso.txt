@@ -1,0 +1,5 @@
+
+
+
+Hacer = "El doc que ya hicieron con el IPO"
+También añadir el  diagrama de flujo - Le toca a Amy
