@@ -45,17 +45,16 @@ class Mascota:
             self.servicios.append(servicio)
 
     def calcular_descuento(self):
-        if self.visitas < 3:
-            descuento = 0
-        elif self.visitas >= 3:
-            descuento = 0.10
+        if self.visitas >= 7:
+            return 0.35
         elif self.visitas >= 5:
-            descuento = 0.15
+            return 0.15
+        elif self.visitas >= 3:
+            return 0.10
         else:
-            descuento = 0.35 
-        return descuento
+            return 0
     
-    def diccionario(self):
+    def a_diccionario(self):
         datos = {
             "codigo": self.codigo,
             "codigo_cliente": self.codigo_cliente,
