@@ -10,7 +10,84 @@ debe usarse en esas dos partes.
 
 
 """
+class Mascota:
+    def __init__(
+            self,
+            codigo,
+            codigo_cliente,
+            nombre,
+            tipo,
+            raza,
+            edad,
+            tamanio,
+            cuidados,
+            visitas,):
+        self.codigo = codigo
+        self.codigo_cliente = codigo_cliente
+        self.nombre = nombre
+        self.tipo = tipo
+        self.raza = raza
+        self.edad = edad
+        self.tamanio = tamanio
+        self.cuidados = cuidados
+        self.visitas = visitas
+        self.servicios = []
+           
+        
+    def agregar_servicio(self, nombre, precio):
+        if precio <0:
+            print("El precio del servicio no puede ser negativo")
+        else:
+            servicio = {
+            "nombre": nombre,
+            "precio": precio,
+            }
+            self.servicios.append(servicio)
+
+    def calcular_descuento(self):
+        if self.visitas >= 7:
+            return 0.35
+        elif self.visitas >= 5:
+            return 0.15
+        elif self.visitas >= 3:
+            return 0.10
+        else:
+            return 0
+    
+    def a_diccionario(self):
+        datos = {
+            "codigo": self.codigo,
+            "codigo_cliente": self.codigo_cliente,
+            "nombre": self.nombre,
+            "tipo": self.tipo,
+            "raza": self.raza,
+            "edad": self.edad,
+            "tamanio": self.tamanio,
+            "cuidados": self.cuidados,
+            "visitas": self.visitas,
+            "servicios": self.servicios,
+        }
+        return datos
+
+def creacion_mascota_diccionario(datos):
+    mascota = Mascota(
+        datos["codigo"],
+        datos["codigo_cliente"],
+        datos["nombre"],
+        datos["tipo"],
+        datos["raza"],
+        datos["edad"],
+        datos["tamanio"],
+        datos["cuidados"],
+        datos["visitas"],
+    )
+    if "servicios" in datos:
+        for servicio in datos["servicios"]:
+            mascota.agregar_servicio(servicio["nombre"], servicio["precio"])
+    return mascota
 
 
-Asignado = "Fátima"
+
+
+#Asignado = "Fátima"
 
