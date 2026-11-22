@@ -45,4 +45,27 @@ def registrar_mascota(datos, codigo_cliente):
     else:
       cuidado = "Ninguno"
 
-  datos[""]
+    datos["contador_mascotas"] = datos["contador_mascotas"] + 1
+    codigo = generar_codigo("M", datos["contador_mascotas"])
+
+    mascota = Mascota(codigo, codigo_cliente, nombre, tipo, raza, edad, tamano, cuidados, 0)
+    datos["mascotas"][codigo] = mascota.a_diccionario()
+    datos["clientes"][codigo_cliente]["mascotas"].append(codigo)
+    return codigo
+
+def registrar(datos):
+    print("\n--- REGISTRO ---")
+    if pedir_si_no("¿El dueño ya esta registrado? (s/n): ")
+        codigo_cliente = pedir_texto("Codigo del dueño: ").upper()
+        if codigo_cliente in datos["clientes"]:
+            print("Dueño encontrado:", datos["clientes"][codigo_cliente]["nombre"])
+        else:
+            print("Ese codigo no existe. Vamos a registrar al dueño.")
+            codigo_cliente = registrar_dueño(datos)
+    else:
+        codigo_cliente = registrar_dueño(datos)
+
+    codigo_mascota = registrar_mascota(datos, codigo_cliente)
+    print("\n¡Registro exitoso!")
+    print("Codigo del dueño:", codigo_cliente)
+    print("Codigo de la mascota:", codigo_mascota)
