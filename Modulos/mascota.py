@@ -45,7 +45,7 @@ class Mascota:
             self.servicios.append(servicio)
 
     def calcular_descuento(self):
-        if self.visitas >= 7:
+        if self.visitas >= 9:
             return 0.35
         elif self.visitas >= 5:
             return 0.15

@@ -1,12 +1,12 @@
-""" 
-En este documento se van a hacer tres funciones: 
-mostrar_menu_servicios(), que imprime los servicios numerados con su precio; 
-calcular_total_servicios(lista_servicios), que suma los precios y devuelve el total; y 
-registrar_servicios(datos), que pide el código, pregunta cuántos servicios quiere y los guarda en la mascota. 
-Se conecta con el diagrama como la opción 3, “Servicios extras”: 
+"""
+En este documento se van a hacer tres funciones:
+mostrar_menu_servicios(), que imprime los servicios numerados con su precio;
+calcular_total_servicios(lista_servicios), que suma los precios y devuelve el total; y
+registrar_servicios(datos), que pide el código, pregunta cuántos servicios quiere y los guarda en la mascota.
+Se conecta con el diagrama como la opción 3, “Servicios extras”:
 el menú con los seis servicios, la cantidad a agregar y el cálculo de Precio_Servicios.
 """
-from constantes import servicios
+from Modulos.constantes import servicios
 
 def mostrar_menu_servicios():
     print("--- Menú de servicios extras ---")
@@ -20,17 +20,21 @@ def calcular_total_servicios(lista_servicios):
     for servicio in lista_servicios:
         total = total + servicio["precio"]
     return total
-#Esto viene de datos que solo esta como comenatario
+
 def registrar_servicios(datos):
     mascotas = datos["mascotas"]
-    codigo = input("Ingrese el código de la mascota: ")
+    codigo = input("Ingrese el código de la mascota: ").strip().upper()
 
     if codigo not in mascotas:
         print("No se encontró ninguna mascota con ese código")
         return
 
     mascota_indi = mascotas[codigo]
-    #servicio viene también de datos que está como comentario
+
+    if mascota_indi.get("estancia") is None:
+        print("Esta mascota no está hospedada actualmente.")
+        return
+
     if "servicios" not in mascota_indi:
         mascota_indi["servicios"] = []
 
@@ -48,7 +52,7 @@ def registrar_servicios(datos):
         try:
             opcion = int(input(f"Seleccione el número del servicio #{i + 1}: "))
         except ValueError:
-            print("Entrada inválida. Ese servicio no se tomó en ceunta")
+            print("Entrada inválida. Ese servicio no se tomó en cuenta")
             continue
 
         if opcion >= 1 and opcion <= len(lista_nombres):

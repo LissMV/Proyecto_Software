@@ -1,0 +1,97 @@
+{
+    "clientes": {
+        "C001": {
+            "nombre": "Aarón",
+            "telefono": "7987-9965",
+            "direccion": "Montebello",
+            "mascotas": [
+                "M001"
+            ]
+        }
+    },
+    "mascotas": {
+        "M001": {
+            "codigo": "M001",
+            "codigo_cliente": "C001",
+            "nombre": "Yoguie",
+            "tipo": "Perro",
+            "raza": "FreshMaltes",
+            "edad": 10,
+            "tamanio": "pequeno",
+            "cuidados": "Ninguno",
+            "visitas": 4,
+            "servicios": [],
+            "estancia": null
+        }
+    },
+    "habitaciones": {
+        "P1": {
+            "tipo": "pequeno",
+            "precio": 8,
+            "ocupada": false,
+            "mascota": null
+        },
+        "P2": {
+            "tipo": "pequeno",
+            "precio": 8,
+            "ocupada": false,
+            "mascota": null
+        },
+        "P3": {
+            "tipo": "pequeno",
+            "precio": 8,
+            "ocupada": false,
+            "mascota": null
+        },
+        "M1": {
+            "tipo": "mediano",
+            "precio": 13,
+            "ocupada": false,
+            "mascota": null
+        },
+        "M2": {
+            "tipo": "mediano",
+            "precio": 13,
+            "ocupada": false,
+            "mascota": null
+        },
+        "M3": {
+            "tipo": "mediano",
+            "precio": 13,
+            "ocupada": false,
+            "mascota": null
+        },
+        "G1": {
+            "tipo": "grande",
+            "precio": 18,
+            "ocupada": false,
+            "mascota": null
+        },
+        "G2": {
+            "tipo": "grande",
+            "precio": 18,
+            "ocupada": false,
+            "mascota": null
+        },
+        "V1": {
+            "tipo": "vip",
+            "precio": 28,
+            "ocupada": false,
+            "mascota": null
+        }
+    },
+    "ingresos": {
+        "hospedaje": 162.4,
+        "servicios": 46.0
+    },
+    "conteo_servicios": {
+        "Baño": 2,
+        "Corte de pelo": 1,
+        "Paseo": 2,
+        "Cuidado personalizado": 0,
+        "Chequeo básico": 0,
+        "Chequeo con tratamiento especial": 0
+    },
+    "contador_clientes": 1,
+    "contador_mascotas": 1
+}

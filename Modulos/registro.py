@@ -1,8 +1,7 @@
-
-""" 
-En este documento se van a hacer las funciones del registro: generar_codigo(prefijo, numero), registrar_dueno(datos), registrar_mascota(datos, codigo_cliente) y registrar(datos), que une todo. 
-Se conecta con el diagrama como la opción 1 completa: “¿Ya está el dueño registrado?”, 
-los datos del dueño y la mascota, el generar y vincular los códigos, 
+"""
+En este documento se van a hacer las funciones del registro: generar_codigo(prefijo, numero), registrar_dueno(datos), registrar_mascota(datos, codigo_cliente) y registrar(datos), que une todo.
+Se conecta con el diagrama como la opción 1 completa: “¿Ya está el dueño registrado?”,
+los datos del dueño y la mascota, el generar y vincular los códigos,
 y el mensaje de registro exitoso con ambos códigos.
 Asignado = "Fabiola"
 """
@@ -18,17 +17,20 @@ def generar_codigo(prefijo, numero):
     else:
       return prefijo + str(numero)
 
-def registar_dueño(datos):
+def registrar_dueño(datos):
     print("\n--- Datos del dueño ---")
     nombre = pedir_texto("Nombre: ")
     telefono = pedir_texto("Telefono: ")
     direccion = pedir_texto("Direccion: ")
-    
+
+    datos["contador_clientes"] = datos["contador_clientes"] + 1
+    codigo = generar_codigo("C", datos["contador_clientes"])
+
     datos["clientes"][codigo] = {
       "nombre": nombre,
       "telefono": telefono,
       "direccion": direccion,
-      "mascota": []
+      "mascotas": []
     }
     return codigo
 
@@ -38,12 +40,12 @@ def registrar_mascota(datos, codigo_cliente):
     tipo = pedir_texto("Tipo de animal: ")
     raza = pedir_texto("Raza: ")
     edad = pedir_entero("Edad: ", 0, 30)
-    tamaño = pedir_opcion("Tamaño (pequeño, mediano o grande): ", ["pequeño", "mediano", "grande"])
-    
+    tamano = pedir_opcion("Tamaño (pequeno, mediano o grande): ", ["pequeno", "mediano", "grande"])
+
     if pedir_si_no("¿Necesita cuidados especiales? (s/n): "):
-      cuidado = pedir_texto("¿Cuales?: ")
+      cuidados = pedir_texto("¿Cuales?: ")
     else:
-      cuidado = "Ninguno"
+      cuidados = "Ninguno"
 
     datos["contador_mascotas"] = datos["contador_mascotas"] + 1
     codigo = generar_codigo("M", datos["contador_mascotas"])
@@ -55,7 +57,7 @@ def registrar_mascota(datos, codigo_cliente):
 
 def registrar(datos):
     print("\n--- REGISTRO ---")
-    if pedir_si_no("¿El dueño ya esta registrado? (s/n): ")
+    if pedir_si_no("¿El dueño ya esta registrado? (s/n): "):
         codigo_cliente = pedir_texto("Codigo del dueño: ").upper()
         if codigo_cliente in datos["clientes"]:
             print("Dueño encontrado:", datos["clientes"][codigo_cliente]["nombre"])
@@ -65,7 +67,10 @@ def registrar(datos):
     else:
         codigo_cliente = registrar_dueño(datos)
 
-    codigo_mascota = registrar_mascota(datos, codigo_cliente)
-    print("\n¡Registro exitoso!")
-    print("Codigo del dueño:", codigo_cliente)
-    print("Codigo de la mascota:", codigo_mascota)
+    otra = True
+    while otra:
+        codigo_mascota = registrar_mascota(datos, codigo_cliente)
+        print("\n¡Registro exitoso!")
+        print("Codigo del dueño:", codigo_cliente)
+        print("Codigo de la mascota:", codigo_mascota)
+        otra = pedir_si_no("¿Desea registrar otra mascota de este dueño? (s/n): ")

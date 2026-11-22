@@ -1,11 +1,46 @@
-"""En este documento se va a hacer el menú principal, 
-que se repite hasta que el usuario elige salir: se carga la información 
-guardada al abrir, se pide una opción del 1 al 6, se llama a la función del 
-módulo correspondiente y se guarda después de cada operación. Se conecta con 
-el diagrama como el bloque de inicio, el menú, el rombo “¿Opción entre 1 y 6?” y las 
-opciones que llevan a cada módulo, hasta el mensaje de finalización y el Fin. 
-Este archivo también importa los demás archivos y revisa que todo encaje.
+from Modulos.datos import crear_datos_iniciales
+from Modulos.persistencia import cargar_datos, guardar_datos
+from Modulos.validaciones import pedir_opcion
+from Modulos.registro import registrar
+from Modulos.hospedaje import hospedar_mascota
+from Modulos.servicios import registrar_servicios
+from Modulos.salida import procesar_salida
+from Modulos.reportes import mostrar_reporte
 
 
--Le toca a Aarón
-"""
+def mostrar_menu():
+    print("\nBIENVENIDO AL HOTEL DE MASCOTAS")
+    print("-------- Menú de opciones --------")
+    print("1. Registro de dueños y mascotas")
+    print("2. Hospedaje")
+    print("3. Servicios extras")
+    print("4. Salida y pago")
+    print("5. Reporte del local")
+    print("6. Salir")
+
+
+def main():
+    datos = cargar_datos(crear_datos_iniciales())
+
+    opcion = ""
+    while opcion != "6":
+        mostrar_menu()
+        opcion = pedir_opcion("Elija una opción (1-6): ", ["1", "2", "3", "4", "5", "6"])
+
+        if opcion == "1":
+            registrar(datos)
+        elif opcion == "2":
+            hospedar_mascota(datos)
+        elif opcion == "3":
+            registrar_servicios(datos)
+        elif opcion == "4":
+            procesar_salida(datos)
+        elif opcion == "5":
+            mostrar_reporte(datos)
+
+        guardar_datos(datos)
+
+    print("Datos guardados. ¡Hasta pronto!")
+
+
+main()

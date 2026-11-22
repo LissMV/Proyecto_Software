@@ -1,21 +1,34 @@
-""" En este documento se va a hacer una función crear_datos_iniciales() 
-que devuelve el diccionario grande datos con todo vacío y con las habitaciones ya creadas. 
-Se conecta con el diagrama como el recuadro de “Información ya dentro del sistema” que 
-aparece al inicio, y con todos los módulos, porque todos reciben este diccionario.
-Todo el equipo depende de este archivo, así que conviene hacerlo primero.
-
-Le toca a Aarón
-
-# datos = {
-#     "clientes": {},          # "C001": {"nombre", "telefono", "direccion", "mascotas": [...]}
-#     "mascotas": {},          # "M001": {"codigo_cliente", "nombre", "tipo", "raza", "edad",
-#                              #          "tamano", "cuidados", "visitas", "estancia", "servicios"}
-#     "habitaciones": {},      # "G1": {"tipo", "precio", "ocupada", "mascota"}
-#     "ingresos": {"hospedaje": 0, "servicios": 0},
-#     "conteo_servicios": {},  # "Baño": 3
-#     "contador_clientes": 0,
-#     "contador_mascotas": 0,
-# }
-"""
+from Modulos.constantes import precios_habitacion, servicios
 
 
+def crear_datos_iniciales():
+    # Cuántas habitaciones hay de cada tipo (se puede cambiar aquí)
+    cantidades = {"pequeno": 3, "mediano": 3, "grande": 2, "vip": 1}
+    letras = {"pequeno": "P", "mediano": "M", "grande": "G", "vip": "V"}
+
+    habitaciones = {}
+    for tipo in cantidades:
+        for numero in range(1, cantidades[tipo] + 1):
+            codigo = letras[tipo] + str(numero)      # P1, P2, M1, ...
+            habitaciones[codigo] = {
+                "tipo": tipo,
+                "precio": precios_habitacion[tipo],
+                "ocupada": False,
+                "mascota": None,
+            }
+
+    # Contador de cada servicio, todos empiezan en 0
+    conteo_servicios = {}
+    for nombre in servicios:
+        conteo_servicios[nombre] = 0
+
+    datos = {
+        "clientes": {},
+        "mascotas": {},
+        "habitaciones": habitaciones,
+        "ingresos": {"hospedaje": 0, "servicios": 0},
+        "conteo_servicios": conteo_servicios,
+        "contador_clientes": 0,
+        "contador_mascotas": 0,
+    }
+    return datos
