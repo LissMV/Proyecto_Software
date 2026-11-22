@@ -8,7 +8,7 @@ Asignado = "Fabiola"
 """
 
 from Modulos.validaciones import pedir_texto, pedir_entero, pedir_opcion, pedir_si_no
-from Modulo.mascota import Mascota
+from Modulos.mascota import Mascota
 
 def generar_codigo(prefijo, numero):
     if numero < 10:

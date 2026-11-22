@@ -12,19 +12,23 @@ Agrega lo que falta: marcar el cuarto como ocupado y liberarlo al salir.
 
 TARIFAS = {
     "VIP": 28,
-    "Grande": 18,
-    "Mediano": 13,
-    "Pequeño": 8,
+    "grande": 18,
+    "mediano": 13,
+    "pequeño": 8,
 }
 
 #VARIABLES# ---> Cantidad de habitaciones disponibles.
 
 habitaciones_disponibles = {
     "VIP": 4,
-    "Grande": 5,
-    "Mediano": 7,
+    "grande": 5,
+    "mediano": 7,
     "pequeño": 8
 }
+
+def obtener_tamano_mascota(codigo):
+    mascotas_demo = {"M001": "Pequeño", "M002": "Mediano", "M003": "Grande"}
+    return mascotas_demo.get(codigo)
 
 #ENTRADAS#
 
@@ -50,6 +54,47 @@ def pedir_datos_estadia():
 
     return noches, respuesta == "s"
 
-def calcular_costo_hospedaje():
-    pass
+#LÓGICA#
 
+def validar_codigo(codigo):
+    return obtener_tamano_mascota(codigo) is not None
+
+def det_tipo_habitacion(es_vip, tamaño):
+    if es_vip:
+        return "VIP"
+    return tamaño.strip().lower()
+
+def disponibilidad(tipo_habitacion):
+    return habitaciones_disponibles.get(tipo_habitacion, 0) > 0
+
+def calcular_precio(tipo_habitacion, noches):
+    return TARIFAS[tipo_habitacion] * noches
+
+#Funciones que se van a mandar a llamar en el main/cuerpo.
+
+def hospedaje():
+    codigo = pedir_codigo_mascota()
+    
+    if not validar_codigo(codigo):
+        print("Este código de mascota no es válido o no esta registrado")
+        raise TypeError("Invalido")
+    
+    tamaño = obtener_tamano_mascota(codigo)
+    noches, es_vip = pedir_datos_estadia()
+    
+    tipo = det_tipo_habitacion(es_vip, tamaño)
+    
+    if not disponibilidad(tipo):
+        print("Lamentamos informar que la habitación seleccionada/asignada "
+        "no esta disponible, intente en otro momento")
+        return None
+    
+    total = calcular_precio(tipo, noches)
+    print(f"Habitación {tipo} por {noches} noche(s). Total a pagar: ${total}")
+    
+    return total
+
+if __name__ == "__main__":
+    hospedaje()
+        
+    
